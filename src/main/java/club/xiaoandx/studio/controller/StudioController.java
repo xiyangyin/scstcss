@@ -74,6 +74,13 @@ public class StudioController implements Parameter {
 		return studioService.getStudioList();
 	}
 	
+	/**
+	 *<p> 查询指定id的工作室 </p> 
+	 * @Title: findById    
+	 * @version:V0.1     
+	 * @param id	id
+	 * @return:Studio	工作室数据
+	 */
 	@GetMapping(value = "/findById/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(httpMethod = "GET", value = "查询指定id的工作室", notes = "id参数<br><br><b>@author xiaox.周巍</b>")
 	@ApiResponses({
@@ -107,7 +114,7 @@ public class StudioController implements Parameter {
 	 *<p>提交保存新的工作室</p> 
 	 * @Title: addStudio    
 	 * @version:V0.1     
-	 * @param studio
+	 * @param studio 	上传数据实体
 	 * @return:StatusMessage 保存状态
 	 */
 	@PostMapping(value = "/addStudio", produces = MediaType.APPLICATION_JSON_VALUE)

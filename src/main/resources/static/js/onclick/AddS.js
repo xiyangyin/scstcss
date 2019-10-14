@@ -19,11 +19,9 @@
             async:false,
             success: function(data) {
                 qiniutoken = data.uptoken;
-                //console.log(data);
-                //console.log('获取七牛云token为:' + qiniutoken);
             },
             error: function(e){
-                //alert(JSON.stringify(e));
+                alert("服务器错误");
             }
         })
     }
@@ -41,14 +39,17 @@
         xhr.onreadystatechange = function() {
             if(xhr.readyState == 4) {
                 var result = xhr.responseText;
-                //console.log('上传请求结果数据:' + result);
                 result = JSON.parse(result);
                 //$("#mypic").attr("src", urlHeader + result.hash);
-                if(result.hash != "Fto5o-5ea0sNMlW_75VgGJCv2AcJ"){
-                	imgPath = urlHeader + result.hash
-                	$("#ImagePath").val(urlHeader + result.hash);
+                if(result.hash != undefined){
+                	if(result.hash != "Fto5o-5ea0sNMlW_75VgGJCv2AcJ"){
+                    	imgPath = urlHeader + result.hash
+                    	$("#ImagePath").val(urlHeader + result.hash);
+                    }else {
+                    	$("#ImagePath").val("上传出现错误,重新选择上传");
+					}
                 }else {
-                	 $("#ImagePath").val("上传出现错误,重新选择上传");
+                	$("#ImagePath").val("上传出现错误,重新选择上传");
 				}
             }
         }
@@ -63,7 +64,6 @@
         reader.onload = function(e) {
             //或者 e.target.result都是一样的，都是base64码
             imgStr = reader.result.split(',')[1];
-            //console.log('需要上传的base64格式图片:' + imgStr);
         }
     });
     //开始上传
