@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="club.xiaoandx.studio.mapper.StudioMapper">
+
+    <sql id="studioColum">
+        `SNAME`,`SNUMBER`,`SADDRESS`,
+        `SQQ`,`SSUMMARY`,`SLOGOPATH`,
+        `SSTATUS`,`STIME`
+    </sql>
+    
+
+    <!-- 查询所有的工作室 -->
+    <select id="getStudioList" resultType="club.xiaoandx.studio.entity.Studio">
+       SELECT 
+		s.SID,
+		s.SNAME,
+		s.SNUMBER,
+		s.SADDRESS,
+		s.SQQ,
+		s.SSUMMARY,
+		s.SLOGOPATH,
+		s.SSTATUS,
+		s.STIME
+	   FROM
+		studio AS s
+    </select>
+    
+    <!-- 添加工作室 -->
+    <insert id="addStudio" parameterType="club.xiaoandx.studio.entity.Studio">
+        insert into `studio`
+        (<include refid="studioColum"/>)
+        values
+        (#{sname},#{snumber},#{saddress},#{sqq},
+         #{ssummary},#{slogoPath},0,#{stime})
+    </insert>
+    
+    <!-- 查询某一个工作室信息 -->
+    <select id="findById" parameterType="java.lang.Integer" resultType="club.xiaoandx.studio.entity.Studio">
+        SELECT 
+        s.SID,s.SNAME,s.SNUMBER,s.SADDRESS,s.SQQ,s.SSUMMARY,s.SLOGOPATH,s.SSTATUS,s.STIME
+       FROM
+        studio AS s
+	   WHERE
+	    s.SID = #{sid}
+    </select>
+</mapper>
