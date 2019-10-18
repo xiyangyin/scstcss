@@ -79,6 +79,6 @@ public interface StudioMapper {
 	 * @param sid    
 	 * @return:void
 	 */
-	void deleteStudio(Integer sid);
+	void deleteStudio(@Param("sid")Integer sid);
 
 }

@@ -54,11 +54,11 @@
             SADDRESS = #{saddress},
             SQQ = #{sqq},
             SSUMMARY = #{ssummary}
-        where SID = #(sid)
+        where SID = #{sid}
     </update>
     
     <!-- 删除工作室 -->
     <delete id="deleteStudio" parameterType="java.lang.Integer">
-        DELETE FROM studio AS s WHERE s.SID = #{sid}
+        DELETE FROM studio WHERE SID = #{sid}
     </delete>
 </mapper>
