@@ -99,8 +99,74 @@
     </div>
              <!-- /. PAGE INNER  -->
             </div>
-         <!-- /. PAGE WRAPPER  -->
-     <!-- /. WRAPPER  -->
+
+        <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- X 按钮关闭 -->
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <!-- 标题 -->
+                    <h4 class="modal-title" id="myModalLabel">
+                        修改工作室
+                    </h4>
+                </div>
+            <!-- 表单 -->
+                <form class="form-horizontal" role="form" >
+                    <div class="modal-body">
+                    <!-- id -->
+                            <div class="form-group">
+                                <label for="disabledTextInput" class="col-sm-2 control-label">当前编号</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="sid" name="This_id" readOnly="true">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname" class="col-sm-2 control-label">名称</label>
+                                <div class="col-sm-10">
+                                    <input type="text" id="sname" class="form-control" name="sname" readOnly="true">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname" class="col-sm-2 control-label">地址</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="saddress" id="saddress">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname" class="col-sm-2 control-label">人数</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="snumber" id="snumber">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname" class="col-sm-2 control-label">QQ</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="sqq" id="sqq">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname" class="col-sm-2 control-label">简介</label>
+                                <div class="col-sm-10">
+                                    <textarea rows="2" cols="10" id="ssummary" style="margin: 0px; width: 466px; height: 34px;"></textarea>
+                                </div>
+                            </div>
+                    </div>
+                    <!-- 关闭及确定 -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="updataFrom()">
+                            修改
+                        </button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
     <!-- JS Scripts-->
     <!-- jQuery Js -->
     <script src="assets/js/jquery-1.10.2.js"></script>
