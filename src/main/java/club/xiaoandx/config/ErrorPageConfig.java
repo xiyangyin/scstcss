@@ -21,9 +21,16 @@ import org.springframework.boot.web.server.ErrorPageRegistry;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 
-
 /**
- * @描叙：  错误页面配置
+ * <p> 
+ *	配置error页面
+ * </p> 
+ * @ClassName:ErrorPageConfig   
+ * @author: xiaoandx.zhouwei
+ * @date: 2019-10-18 19:30
+ * @since: JDK1.8
+ * @version V0.1
+ * @Copyright: Note: This prohibition leaks and for other commercial projects
  */
 @Configuration
 public class ErrorPageConfig implements ErrorPageRegistrar {
