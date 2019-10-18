@@ -67,4 +67,22 @@ public interface StudioService {
 	 * @return:Studio
 	 */
 	public Studio findById(Integer id);
+
+	/**  
+	 *<p> </p> 
+	 * @Title: updateStudio    
+	 * @version:V0.1     
+	 * @param studio    
+	 * @return:void
+	 */
+	public void updateStudio(Studio studio);
+
+	/**  
+	 *<p> </p> 
+	 * @Title: deleteStudio    
+	 * @version:V0.1     
+	 * @param sid    
+	 * @return:void
+	 */
+	public void deleteStudio(Integer sid);
 }

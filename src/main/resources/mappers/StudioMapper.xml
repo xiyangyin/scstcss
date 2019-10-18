@@ -45,4 +45,20 @@
 	   WHERE
 	    s.SID = #{sid}
     </select>
+    
+    <!-- 修改工作室 -->
+    <update id="updateStudio" parameterType="club.xiaoandx.studio.entity.Studio">
+        update studio
+        set
+            SNUMBER = #{snumber},
+            SADDRESS = #{saddress},
+            SQQ = #{sqq},
+            SSUMMARY = #{ssummary}
+        where SID = #(sid)
+    </update>
+    
+    <!-- 删除工作室 -->
+    <delete id="deleteStudio" parameterType="java.lang.Integer">
+        DELETE FROM studio AS s WHERE s.SID = #{sid}
+    </delete>
 </mapper>

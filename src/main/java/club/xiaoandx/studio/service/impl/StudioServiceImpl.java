@@ -22,6 +22,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.qiniu.util.Auth;
 
@@ -67,6 +68,7 @@ public class StudioServiceImpl implements StudioService,Parameter {
 	 * @return   List<Studio> 工作室集合
 	 * @see club.xiaoandx.studio.service.StudioService#getStudioList()   
 	 */
+	@Transactional(readOnly = true)
 	@Override
 	public List<Studio> getStudioList() {
 		return studioMapper.getStudioList();
@@ -120,10 +122,34 @@ public class StudioServiceImpl implements StudioService,Parameter {
 	 * @return   
 	 * @see club.xiaoandx.studio.service.StudioService#findById(java.lang.Integer)   
 	 */
+	@Transactional(readOnly = true)
 	@Override
 	public Studio findById(Integer id) {
 		// TODO Auto-generated method stub
 		return studioMapper.findById(id);
+	}
+
+	/**   
+	 * <p>Title: updateStudio</p>   
+	 * <p>Description: </p>   
+	 * @param studio   
+	 * @see club.xiaoandx.studio.service.StudioService#updateStudio(club.xiaoandx.studio.entity.Studio)   
+	 */
+	@Override
+	public void updateStudio(Studio studio) {
+		studioMapper.updateStudio(studio);
+	}
+
+	/**   
+	 * <p>Title: deleteStudio</p>   
+	 * <p>Description: </p>   
+	 * @param sid   
+	 * @see club.xiaoandx.studio.service.StudioService#deleteStudio(java.lang.Integer)   
+	 */
+	@Override
+	public void deleteStudio(Integer sid) {
+		// TODO Auto-generated method stub
+		studioMapper.deleteStudio(sid);
 	}
 
 }

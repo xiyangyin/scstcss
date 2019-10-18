@@ -20,9 +20,11 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -132,5 +134,55 @@ public class StudioController implements Parameter {
 			return new StatusMessage(RESPOSE_ERROR, "PeopleNumber is zero.");
 		}
 		return new StatusMessage(RESPOSE_ERROR, "Name is null.");
+	}
+	
+	/**
+	 *<p>修改工作室</p> 
+	 * @Title: updateStudio    
+	 * @version:V0.1     
+	 * @param studio			工作室更新数据对象
+	 * @return:StatusMessage	操作结果
+	 */
+	@PutMapping(value = "/updateStudio", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(httpMethod = "PUT",value = "修改工作室",notes = "修改工作室（根据id）<br><br><b>@author xiaox.周巍</b>")
+	@ApiResponses({
+		@ApiResponse(code = 400,message = "未传入指定参数"),
+		@ApiResponse(code = 404,message = "未找到指定页面")
+	})
+	public StatusMessage updateStudio(@ApiParam(value = "修改工作室的数据对象*必填", required = true) @RequestBody Studio studio) {
+		if(null != studio && ENTER_NUMBER != studio.getSid()) {
+			try {
+				studioService.updateStudio(studio);
+				return new StatusMessage(RESPOSE_SUCCESS, "SUCESS");
+			} catch (Exception e) {
+				return new StatusMessage(RESPOSE_ERROR, "Update Error");
+			}
+		}
+		return new StatusMessage(RESPOSE_ERROR, "Parameter error");
+	}
+	
+	/**
+	 *<p>删除工作室</p> 
+	 * @Title: deleteStudio    
+	 * @version:V0.1     
+	 * @param sid				要删除的工作室id
+	 * @return:StatusMessage 	操作结果
+	 */
+	@DeleteMapping(value = "/deleteStudio/{sid}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(httpMethod = "DELETE",value = "删除工作室",notes = "删除工作室（根据sid）<br><br><b>@author xiaox.周巍</b>")
+	@ApiResponses({
+		@ApiResponse(code = 400,message = "未传入指定参数"),
+		@ApiResponse(code = 404,message = "未找到指定页面")
+	})
+	public StatusMessage deleteStudio(@ApiParam(value = "删除工作室（根据sid）*必填",required = true)@PathVariable("sid") Integer sid) {
+		if(null != sid && ENTER_NUMBER != sid) {
+			try {
+				studioService.deleteStudio(sid);
+				return new StatusMessage(RESPOSE_SUCCESS, "SUCESS");
+			} catch (Exception e) {
+				return new StatusMessage(RESPOSE_ERROR, "Delete Error");
+			}
+		}
+		return new StatusMessage(RESPOSE_ERROR, "Parameter error");
 	}
 }
