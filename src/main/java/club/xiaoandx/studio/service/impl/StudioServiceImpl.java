@@ -34,11 +34,12 @@ import club.xiaoandx.studio.entity.Studio;
 import club.xiaoandx.studio.mapper.StudioMapper;
 import club.xiaoandx.studio.service.StudioService;
 
-/**  
- * <p> 
- *	studioService接口实现类
- * </p> 
- * @ClassName:StudioServiceImpl   
+/**
+ * <p>
+ * studioService接口实现类
+ * </p>
+ * 
+ * @ClassName:StudioServiceImpl
  * @author: xiaoandx.zhouwei
  * @date: 2019-10-14 11:06
  * @since: JDK1.8
@@ -46,11 +47,11 @@ import club.xiaoandx.studio.service.StudioService;
  * @Copyright: Note: This prohibition leaks and for other commercial projects
  */
 @Service
-public class StudioServiceImpl implements StudioService,Parameter {
+public class StudioServiceImpl implements StudioService, Parameter {
 
 	@Autowired
 	private StudioMapper studioMapper;
-	
+
 	// 七牛云accessKey
 	@Value("${qinliu.accessKey}")
 	private String accessKey;
@@ -60,24 +61,29 @@ public class StudioServiceImpl implements StudioService,Parameter {
 	// 七牛云bucket（文件储存库的名字）
 	@Value("${qinliu.bucket}")
 	private String bucket;
-		
-		
-	/**   
-	 * <p>Title: getStudioList</p>   
-	 * <p>Description: </p>   
-	 * @return   List<Studio> 工作室集合
-	 * @see club.xiaoandx.studio.service.StudioService#getStudioList()   
+
+	/**
+	 * <p>
+	 * Title: getStudioList
+	 * </p>
+	 * <p>
+	 * Description:
+	 * </p>
+	 * 
+	 * @return List<Studio> 工作室集合
+	 * @see club.xiaoandx.studio.service.StudioService#getStudioList()
 	 */
 	@Transactional(readOnly = true)
 	@Override
 	public List<Studio> getStudioList() {
 		return studioMapper.getStudioList();
 	}
-	
+
 	/**
 	 * <p>
 	 * 获取七牛云上传token凭证
 	 * </p>
+	 * 
 	 * @Title: getToken
 	 * @version:V0.1
 	 * @return:Map<String,String>
@@ -96,16 +102,21 @@ public class StudioServiceImpl implements StudioService,Parameter {
 		return map;
 	}
 
-	/**   
-	 * <p>Title: addStudio</p>   
-	 * <p>Description: </p>   
-	 * @param studio   
-	 * @see club.xiaoandx.studio.service.StudioService#addStudio(club.xiaoandx.studio.entity.Studio)   
+	/**
+	 * <p>
+	 * Title: addStudio
+	 * </p>
+	 * <p>
+	 * Description:
+	 * </p>
+	 * 
+	 * @param studio
+	 * @see club.xiaoandx.studio.service.StudioService#addStudio(club.xiaoandx.studio.entity.Studio)
 	 */
 	@Override
 	public void addStudio(Studio studio) {
 		try {
-			if(null == studio.getSlogoPath()) {
+			if (null == studio.getSlogoPath()) {
 				studio.setSlogoPath(DEFAULT_PATH);
 			}
 			studio.setStime(IdAndTimeUtil.getNewDate());
@@ -115,40 +126,53 @@ public class StudioServiceImpl implements StudioService,Parameter {
 		}
 	}
 
-	/**   
-	 * <p>Title: findById</p>   
-	 * <p>Description: </p>   
+	/**
+	 * <p>
+	 * Title: findById
+	 * </p>
+	 * <p>
+	 * Description:
+	 * </p>
+	 * 
 	 * @param id
-	 * @return   
-	 * @see club.xiaoandx.studio.service.StudioService#findById(java.lang.Integer)   
+	 * @return
+	 * @see club.xiaoandx.studio.service.StudioService#findById(java.lang.Integer)
 	 */
 	@Transactional(readOnly = true)
 	@Override
 	public Studio findById(Integer id) {
-		// TODO Auto-generated method stub
 		return studioMapper.findById(id);
 	}
 
-	/**   
-	 * <p>Title: updateStudio</p>   
-	 * <p>Description: </p>   
-	 * @param studio   
-	 * @see club.xiaoandx.studio.service.StudioService#updateStudio(club.xiaoandx.studio.entity.Studio)   
+	/**
+	 * <p>
+	 * Title: updateStudio
+	 * </p>
+	 * <p>
+	 * Description:
+	 * </p>
+	 * 
+	 * @param studio
+	 * @see club.xiaoandx.studio.service.StudioService#updateStudio(club.xiaoandx.studio.entity.Studio)
 	 */
 	@Override
 	public void updateStudio(Studio studio) {
 		studioMapper.updateStudio(studio);
 	}
 
-	/**   
-	 * <p>Title: deleteStudio</p>   
-	 * <p>Description: </p>   
-	 * @param sid   
-	 * @see club.xiaoandx.studio.service.StudioService#deleteStudio(java.lang.Integer)   
+	/**
+	 * <p>
+	 * Title: deleteStudio
+	 * </p>
+	 * <p>
+	 * Description:
+	 * </p>
+	 * 
+	 * @param sid
+	 * @see club.xiaoandx.studio.service.StudioService#deleteStudio(java.lang.Integer)
 	 */
 	@Override
 	public void deleteStudio(Integer sid) {
-		// TODO Auto-generated method stub
 		studioMapper.deleteStudio(sid);
 	}
 

@@ -20,11 +20,12 @@ import java.util.Map;
 
 import club.xiaoandx.studio.entity.Studio;
 
-/**  
- * <p> 
- *	工作室接口
- * </p> 
- * @ClassName:StudioService   
+/**
+ * <p>
+ * 工作室接口
+ * </p>
+ * 
+ * @ClassName:StudioService
  * @author: xiaoandx.zhouwei
  * @date: 2019-10-14 11:05
  * @since: JDK1.8
@@ -32,56 +33,68 @@ import club.xiaoandx.studio.entity.Studio;
  * @Copyright: Note: This prohibition leaks and for other commercial projects
  */
 public interface StudioService {
-	
+
 	/**
-	 *<p> </p> 
-	 * @Title: getStudioList    
-	 * @version:V0.1     
+	 * <p>
+	 * </p>
+	 * 
+	 * @Title: getStudioList
+	 * @version:V0.1
 	 * @return:List<Studio>
 	 */
 	public List<Studio> getStudioList();
 
-	/**  
-	 *<p> </p> 
-	 * @Title: getToken    
-	 * @version:V0.1     
+	/**
+	 * <p>
+	 * </p>
+	 * 
+	 * @Title: getToken
+	 * @version:V0.1
 	 * @return:Map<String,String>
 	 */
 	public Map<String, String> getToken();
 
-	/**  
-	 *<p> </p> 
-	 * @Title: addStudio    
-	 * @version:V0.1     
-	 * @param studio    
+	/**
+	 * <p>
+	 * </p>
+	 * 
+	 * @Title: addStudio
+	 * @version:V0.1
+	 * @param studio
 	 * @return:void
 	 */
 	public void addStudio(Studio studio);
 
-	/**  
-	 *<p> </p> 
-	 * @Title: findById    
-	 * @version:V0.1     
+	/**
+	 * <p>
+	 * </p>
+	 * 
+	 * @Title: findById
+	 * @version:V0.1
 	 * @param id
-	 * @return    
+	 * @return
 	 * @return:Studio
 	 */
 	public Studio findById(Integer id);
 
-	/**  
-	 *<p> </p> 
-	 * @Title: updateStudio    
-	 * @version:V0.1     
-	 * @param studio    
+	/**
+	 * <p>
+	 * </p>
+	 * 
+	 * @Title: updateStudio
+	 * @version:V0.1
+	 * @param studio
 	 * @return:void
 	 */
 	public void updateStudio(Studio studio);
 
-	/**  
-	 *<p> </p> 
-	 * @Title: deleteStudio    
-	 * @version:V0.1     
-	 * @param sid    
+	/**
+	 * <p>
+	 * </p>
+	 * 
+	 * @Title: deleteStudio
+	 * @version:V0.1
+	 * @param sid
 	 * @return:void
 	 */
 	public void deleteStudio(Integer sid);

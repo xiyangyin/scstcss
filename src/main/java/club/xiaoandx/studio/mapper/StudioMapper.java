@@ -22,11 +22,12 @@ import org.apache.ibatis.annotations.Param;
 
 import club.xiaoandx.studio.entity.Studio;
 
-/**  
- * <p> 
- *	工作室持久层接口
- * </p> 
- * @ClassName:StudioMapper   
+/**
+ * <p>
+ * 工作室持久层接口
+ * </p>
+ * 
+ * @ClassName:StudioMapper
  * @author: xiaoandx.zhouwei
  * @date: 2019-10-14 11:12
  * @since: JDK1.8
@@ -36,49 +37,64 @@ import club.xiaoandx.studio.entity.Studio;
 @Mapper
 public interface StudioMapper {
 
-	/**  
-	 *<p> </p> 
-	 * @Title: getStudioList    
-	 * @version:V0.1     
+	/**
+	 * <p>
+	 * 获取工作室列表
+	 * </p>
+	 * 
+	 * @Title: getStudioList
+	 * @version:V0.1
 	 * @return:List<Studio>
 	 */
 	List<Studio> getStudioList();
 
-	/**  
-	 *<p> </p> 
-	 * @Title: addStudio    
-	 * @version:V0.1     
-	 * @param studio    
+	/**
+	 * <p>
+	 * 添加工作室
+	 * </p>
+	 * 
+	 * @Title: addStudio
+	 * @version:V0.1
+	 * @param studio
 	 * @return:void
 	 */
 	void addStudio(Studio studio);
 
-	/**  
-	 *<p> </p> 
-	 * @Title: findById    
-	 * @version:V0.1     
+	/**
+	 * <p>
+	 * 查询某一个工作室的信息
+	 * </p>
+	 * 
+	 * @Title: findById
+	 * @version:V0.1
 	 * @param id
-	 * @return    
+	 * @return
 	 * @return:Studio
 	 */
-	Studio findById(@Param("sid")Integer id);
+	Studio findById(@Param("sid") Integer id);
 
-	/**  
-	 *<p> </p> 
-	 * @Title: updateStudio    
-	 * @version:V0.1     
-	 * @param studio    
+	/**
+	 * <p>
+	 * 更新工作室
+	 * </p>
+	 * 
+	 * @Title: updateStudio
+	 * @version:V0.1
+	 * @param studio
 	 * @return:void
 	 */
 	void updateStudio(Studio studio);
 
-	/**  
-	 *<p> </p> 
-	 * @Title: deleteStudio    
-	 * @version:V0.1     
-	 * @param sid    
+	/**
+	 * <p>
+	 * 删除工作室
+	 * </p>
+	 * 
+	 * @Title: deleteStudio
+	 * @version:V0.1
+	 * @param sid
 	 * @return:void
 	 */
-	void deleteStudio(@Param("sid")Integer sid);
+	void deleteStudio(@Param("sid") Integer sid);
 
 }
