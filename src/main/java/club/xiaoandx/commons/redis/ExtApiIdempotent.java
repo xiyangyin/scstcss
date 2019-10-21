@@ -13,34 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package club.xiaoandx.commons.core;
+package club.xiaoandx.commons.redis;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**  
- * <p>插入数据状态码</p> 
- * @ClassName:AddCode   
- * @author: XIAOX.周巍 
- * @date: 2019年5月19日 下午8:37:36   
- * @since: JDK1.8 
- * @version V2.0
- * @Copyright: 注意：本内容仅限于学习传阅，禁止外泄以及用于其他的商业目
+ * <p> 
+ *
+ * </p> 
+ * @ClassName:ExtApiIdempotent   
+ * @author: xiaoandx.zhouwei
+ * @date: 2019-10-21 11:29
+ * @since: JDK1.8
+ * @version V0.1
+ * @Copyright: Note: This prohibition leaks and for other commercial projects
  */
-public interface DaoCode {
-	
-	/**
-	 * 数据库操作成功
-	 */
-	static final Integer SUCCESS = 1;
-	/**
-	 * 数据库操作失败
-	 */
-	static final Integer ERROR = 0;
-	/**
-	 * 参与内容公开
-	 */
-	static final int YES_PUBLIC = 0;
-	/**
-	 * 参与内容不公开
-	 */
-	static final int NO_PUBLIC = 1;
-	
+@Target(value = ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface ExtApiIdempotent  {
+	String value();
 }
