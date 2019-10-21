@@ -32,6 +32,8 @@ import org.springframework.web.bind.annotation.RestController;
 import club.xiaoandx.commons.core.Parameter;
 import club.xiaoandx.commons.core.PublicErrorCode;
 import club.xiaoandx.commons.exception.CommonException;
+import club.xiaoandx.commons.redis.ExtApiIdempotent;
+import club.xiaoandx.commons.utils.RedisTokenUtil;
 import club.xiaoandx.studio.entity.Studio;
 import club.xiaoandx.studio.service.StudioService;
 import club.xiaoandx.studio.vo.StatusMessage;
@@ -59,6 +61,8 @@ public class StudioController implements Parameter {
 	
 	@Autowired
 	private StudioService studioService;
+	@Autowired
+	private RedisTokenUtil redisTokenUtil;
 	
 	/**
 	 * <p>
@@ -125,6 +129,7 @@ public class StudioController implements Parameter {
 	@PostMapping(value = "/addStudio", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(httpMethod = "POST", value = "提交保存新的工作室", notes = "需要传入工作室数据，封装为一个对象传给后端）<br><b>@autho xiaox.周巍</b>")
 	@ApiResponses({ @ApiResponse(code = 400, message = "未传入指定参数"), @ApiResponse(code = 404, message = "未找到指定页面") })
+	@ExtApiIdempotent(value = Parameter.EXTAPIHEAD)
 	public StatusMessage addStudio(@ApiParam(value = "工作室数据对象*必填", required = true) @RequestBody Studio studio) {
 		if (null != studio.getSname() && NO_ZIFUCUAN != studio.getSname()) {
 			if (ENTER_NUMBER != studio.getSnumber()) {
@@ -186,4 +191,26 @@ public class StudioController implements Parameter {
 		}
 		return new StatusMessage(RESPOSE_ERROR, "Parameter error");
 	}
+	
+	/**
+	 *<p>
+	 *	获取操作token
+	 *</p> 
+	 * @Title: RedisToken    
+	 * @version:V0.1     
+	 * @return    
+	 * @return:String
+	 */
+	@GetMapping("/redisToken")
+	@ApiOperation(httpMethod = "GET", value = "获取操作token", notes = "获取操作token<br><br><b>@author xiaox.周巍</b>")
+    public String RedisToken() {
+        return redisTokenUtil.getToken();
+    }
+	
+	@GetMapping("/examinationToken")
+	@ApiOperation(httpMethod = "GET", value = "验证token", notes = "验证token<br><br><b>@author xiaox.周巍</b>")
+    @ExtApiIdempotent(value = Parameter.EXTAPIHEAD)
+    public String addOrder() {
+        return "success";
+    }
 }

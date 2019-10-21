@@ -18,7 +18,7 @@ public class NoAuthenticationException extends RuntimeException {
     protected Integer code;
 	
 	public NoAuthenticationException() {
-		super("Token无效");
+		super("Token invalid. Please re-obtain the latest token");
 		this.code = PublicErrorCode.AUTH_EXCEPTION.getIntValue();
 	}
 	

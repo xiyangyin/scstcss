@@ -7,7 +7,11 @@
 	let imgPath = '';
 	//七牛云平台 配置的域名
 	let urlHeader = "http://image.xiaoandx.club/";
+	let tokenN = '';
 	
+	$(function() {
+		getToken();
+	});
 
 	//获取七牛云token
     function qnToken() {
@@ -81,6 +85,10 @@
  function linkHome(){
 	window.location.href='index.html';
 }
+ 
+ function getToken() {
+	 $.get("/v1/open/studio/redisToken",function(data){tokenN = data;});
+}
 
  /**
   * 提交表单
@@ -114,14 +122,21 @@ function submitAddS(){
 								  type: 'POST',
 								  url: "/v1/open/studio/addStudio",
 								  data: JSON.stringify(uu),
+								  beforeSend: function (XMLHttpRequest) {
+						         		XMLHttpRequest.setRequestHeader("token", tokenN);
+						          },
 								  success: function(data) {
 									  if(data.statusCode == 200200){
 										  linkHome();
 									  }else {
 										return;
 									}
-									  
 								  },
+								  error: function(e) {
+									  if(e.responseJSON.code == 48005000){
+										  window.alert("提交超时，刷新重试")
+									  }
+								},
 								  dataType: 'json',
 								  contentType: "application/json;charset-UTF-8"
 								});

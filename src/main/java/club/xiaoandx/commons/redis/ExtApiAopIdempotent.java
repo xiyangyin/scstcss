@@ -35,6 +35,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import club.xiaoandx.commons.core.Parameter;
+import club.xiaoandx.commons.exception.NoAuthenticationException;
 import club.xiaoandx.commons.utils.RedisTokenUtil;
 
 /**  
@@ -54,7 +55,7 @@ public class ExtApiAopIdempotent {
 	@Autowired
 	private RedisTokenUtil redisTokenUtil;
 
-	@Pointcut("execution(public * com.itmayiedu.controller.*.*(..))")
+	@Pointcut("execution(public * club.xiaoandx.studio.controller.*.*(..))")
 	public void rlAop() {
 	}
 
@@ -95,8 +96,7 @@ public class ExtApiAopIdempotent {
 		HttpServletRequest request = getRequest();
 		String valueType = extApiIdempotent.value();
 		if (StringUtils.isEmpty(valueType)) {
-			response("参数错误!");
-			return null;
+			throw new NoAuthenticationException();
 		}
 		String token = null;
 		if (valueType.equals(Parameter.EXTAPIHEAD)) {
@@ -105,12 +105,10 @@ public class ExtApiAopIdempotent {
 			token = request.getParameter("token");
 		}
 		if (StringUtils.isEmpty(token)) {
-			response("参数错误!");
-			return null;
+			throw new NoAuthenticationException();
 		}
 		if (!redisTokenUtil.findToken(token)) {
-			response("请勿重复提交!");
-			return null;
+			throw new NoAuthenticationException();
 		}
 		Object proceed = proceedingJoinPoint.proceed();
 		return proceed;

@@ -34,7 +34,7 @@ import club.xiaoandx.commons.redis.BaseRedisService;
  */
 @Component
 public class RedisTokenUtil {
-	private long timeout = 60 * 60;
+	private long timeout = 60 * 10;
 	@Autowired
 	private BaseRedisService baseRedisService;
 
