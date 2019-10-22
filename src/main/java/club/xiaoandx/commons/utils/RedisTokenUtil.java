@@ -15,6 +15,8 @@
  */
 package club.xiaoandx.commons.utils;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -40,7 +42,7 @@ public class RedisTokenUtil {
 
 	// 将token存入在redis
 	public String getToken() {
-		String token = "token" + System.currentTimeMillis();
+		String token = "token" + UUID.randomUUID().toString();
 		baseRedisService.setString(token, token, timeout);
 		return token;
 	}
