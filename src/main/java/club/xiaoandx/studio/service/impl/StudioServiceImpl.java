@@ -15,9 +15,11 @@
  */
 package club.xiaoandx.studio.service.impl;
 
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Base64.Decoder;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -140,8 +142,11 @@ public class StudioServiceImpl implements StudioService, Parameter {
 	 */
 	@Transactional(readOnly = true)
 	@Override
-	public Studio findById(Integer id) {
-		return studioMapper.findById(id);
+	public Studio findById(String id) {
+		Decoder decoder = Base64.getDecoder();
+		byte[] bytes = decoder.decode(id);
+		Integer NewId = Integer.valueOf(new String(bytes));
+		return studioMapper.findById(NewId);
 	}
 
 	/**

@@ -15,8 +15,13 @@
  */
 package club.xiaoandx.studio.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -33,6 +38,7 @@ import club.xiaoandx.commons.core.Parameter;
 import club.xiaoandx.commons.core.PublicErrorCode;
 import club.xiaoandx.commons.exception.CommonException;
 import club.xiaoandx.commons.redis.ExtApiIdempotent;
+import club.xiaoandx.commons.utils.CaptchaUtil;
 import club.xiaoandx.commons.utils.RedisTokenUtil;
 import club.xiaoandx.studio.entity.Studio;
 import club.xiaoandx.studio.service.StudioService;
@@ -93,8 +99,8 @@ public class StudioController implements Parameter {
 	@GetMapping(value = "/findById/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(httpMethod = "GET", value = "查询指定id的工作室", notes = "id参数<br><br><b>@author xiaox.周巍</b>")
 	@ApiResponses({ @ApiResponse(code = 400, message = "未传入指定参数"), @ApiResponse(code = 404, message = "未找到指定页面") })
-	public Studio findById(@ApiParam(value = "工作室id*必填", required = true) @PathVariable Integer id) {
-		if (null != id && ENTER_NUMBER != id) {
+	public Studio findById(@ApiParam(value = "工作室id*必填", required = true) @PathVariable String id) {
+		if (null != id && NO_ZIFUCUAN != id) {
 			return studioService.findById(id);
 		}
 		throw new CommonException(PublicErrorCode.PARAM_EXCEPTION.getIntValue(), "error ID IS NULL");
@@ -203,14 +209,40 @@ public class StudioController implements Parameter {
 	 */
 	@GetMapping("/redisToken")
 	@ApiOperation(httpMethod = "GET", value = "获取操作token", notes = "获取操作token<br><br><b>@author xiaox.周巍</b>")
+	@ApiResponses({ @ApiResponse(code = 400, message = "未传入指定参数"), @ApiResponse(code = 404, message = "未找到指定页面") })
     public String RedisToken() {
         return redisTokenUtil.getToken();
     }
 	
-	@GetMapping("/examinationToken")
-	@ApiOperation(httpMethod = "GET", value = "验证token", notes = "验证token<br><br><b>@author xiaox.周巍</b>")
-    @ExtApiIdempotent(value = Parameter.EXTAPIHEAD)
-    public String addOrder() {
-        return "success";
-    }
+	/**
+	 *<p> 
+	 *	获取验证码
+	 *</p> 
+	 * @Title: doGet    
+	 * @version:V0.1     
+	 * @param request
+	 * @param response
+	 * @throws Exception    
+	 * @return:void
+	 */
+	@GetMapping("/user/check.jpg")
+	@ApiOperation(httpMethod = "GET", value = "获取验证码", notes = "获取验证码<br><br><b>@author xiaox.周巍</b>")
+	@ApiResponses({ @ApiResponse(code = 400, message = "未传入指定参数"), @ApiResponse(code = 404, message = "未找到指定页面") })
+	public void check(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			// 通知浏览器不要缓存
+			response.setHeader("Expires", "-1");
+			response.setHeader("Cache-Control", "no-cache");
+			response.setHeader("Pragma", "-1");
+			CaptchaUtil util = CaptchaUtil.Instance();
+			// 将验证码输入到session中，用来验证
+			String code = util.getString();
+			request.getSession().setAttribute("code", code);
+			// 输出打web页面
+			ImageIO.write(util.getImage(), "jpg", response.getOutputStream());
+		} catch (IOException e) {
+			throw new CommonException(PublicErrorCode.PARAM_EXCEPTION.getIntValue(), "check generate error");
+		}
+	}
+	
 }

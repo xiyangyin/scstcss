@@ -75,7 +75,7 @@ public interface StudioService {
 	 * @return
 	 * @return:Studio
 	 */
-	public Studio findById(Integer id);
+	public Studio findById(String id);
 
 	/**
 	 * <p>
