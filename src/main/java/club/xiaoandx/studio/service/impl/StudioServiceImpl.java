@@ -148,8 +148,13 @@ public class StudioServiceImpl implements StudioService, Parameter, DaoCode {
 	@Override
 	public Studio findById(String id) {
 		Decoder decoder = Base64.getDecoder();
-		byte[] bytes = decoder.decode(id);
-		Integer NewId = Integer.valueOf(new String(bytes));
+		Integer NewId ;
+		try{
+			byte[] bytes = decoder.decode(id);
+			NewId = Integer.valueOf(new String(bytes));
+		}catch (Exception e){
+			throw new CommonException(PublicErrorCode.PARAM_EXCEPTION.getIntValue(), "ID ERROR");
+		}
 		return studioMapper.findById(NewId);
 	}
 
