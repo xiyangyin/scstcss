@@ -140,7 +140,7 @@ public class StudioController implements Parameter {
 	@ExtApiIdempotent(value = Parameter.EXTAPIHEAD)
 	public StatusMessage addStudio(@ApiParam(value = "工作室数据对象*必填", required = true) @RequestBody Studio studio) {
 		if (null != studio.getSname() && NO_ZIFUCUAN != studio.getSname()) {
-			if (ENTER_NUMBER != studio.getSnumber()) {
+			if (!ENTER_NUMBER.equals(studio.getSnumber())) {
 				studioService.addStudio(studio);
 				return new StatusMessage(RESPOSE_SUCCESS, "SUCCESS");
 			}
