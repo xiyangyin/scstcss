@@ -68,4 +68,9 @@ public interface Parameter {
 	 * 表单
 	 */
     static final String EXTAPIFROM = "from";
+
+    /**
+     * redis 保存时间
+     */
+    static final long REDISTIME = 60 * 5;
 }

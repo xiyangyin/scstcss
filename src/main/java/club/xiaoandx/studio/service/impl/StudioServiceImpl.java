@@ -19,6 +19,7 @@ import java.util.*;
 import java.util.Base64.Decoder;
 
 import club.xiaoandx.commons.core.DaoCode;
+import club.xiaoandx.commons.redis.BaseRedisService;
 import club.xiaoandx.studio.entity.User;
 import club.xiaoandx.studio.vo.AdminUser;
 import com.alibaba.fastjson.JSON;
@@ -56,6 +57,8 @@ public class StudioServiceImpl implements StudioService, Parameter, DaoCode {
 
 	@Autowired
 	private StudioMapper studioMapper;
+	@Autowired
+	private BaseRedisService baseRedisService;
 
 	// 七牛云accessKey
 	@Value("${qinliu.accessKey}")
@@ -205,6 +208,8 @@ public class StudioServiceImpl implements StudioService, Parameter, DaoCode {
 		if (!oU.isEmpty()){
 			String usernameSession = oU.get(ENTER_NUMBER).getUserName();
 			req.getSession().setAttribute(usernameSession, JSON.toJSONString(oU.get(ENTER_NUMBER)));
+			//将user写入redis
+			baseRedisService.setString(usernameSession, usernameSession, REDISTIME);
 			return SUCCESS;
 		}
 		return ERROR;

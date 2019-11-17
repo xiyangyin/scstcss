@@ -27,7 +27,7 @@
 	            <input name="username" type="text" id="username"  value="用户名" onfocus="this.value=''" onblur="if(this.value==''){this.value='用户名'}">
 		        <span id="password_text" onclick="this.style.display='none';document.getElementById('password').style.display='block';document.getElementById('password').focus().select();" >密码</span>
 				<input name="password" type="password" id="password" style="display:none;" onblur="if(this.value==''){document.getElementById('password_text').style.display='block';this.style.display='none'};"/>
-		         <input type="text" class="form-control" id="inputPassword3" name="ucheckC" placeholder="请输入验证码" style="width: 50%"><img class="check" id="img" src="/v1/open/studio/user/check.jpg" onclick="refresh()">
+		         <input type="text" class="form-control" id="inputPassword3" name="ucheckC" placeholder="验证码区分大小写" style="width: 50%"><img class="check" id="img" src="/v1/open/studio/user/check.jpg" onclick="refresh()">
 <!--		        <input value="登录" style="width:100%;" onclick="sub()">-->
 				  <button style="width:100%;" class="sub" onclick="sub()">登录</button>
 

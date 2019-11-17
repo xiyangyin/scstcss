@@ -23,6 +23,7 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import club.xiaoandx.commons.redis.BaseRedisService;
 import club.xiaoandx.studio.entity.User;
 import club.xiaoandx.studio.vo.AdminUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +72,8 @@ public class StudioController implements Parameter {
 	private StudioService studioService;
 	@Autowired
 	private RedisTokenUtil redisTokenUtil;
+	@Autowired
+	private BaseRedisService baseRedisService;
 	
 	/**
 	 * <p>
@@ -241,6 +244,8 @@ public class StudioController implements Parameter {
 			// 将验证码输入到session中，用来验证
 			String code = util.getString();
 			request.getSession().setAttribute("code", code);
+			//将code写入redis
+			baseRedisService.setString(code, code, REDISTIME);
 			// 输出打web页面
 			ImageIO.write(util.getImage(), "jpg", response.getOutputStream());
 		} catch (IOException e) {
@@ -262,8 +267,9 @@ public class StudioController implements Parameter {
 	public StatusMessage doLogin(@RequestBody AdminUser adu , HttpServletRequest req){
 		if (null != adu.getUserName() && !NO_ZIFUCUAN.equals(adu.getUserName())){
 			if (null != adu.getPassWord() && !NO_ZIFUCUAN.equals(adu.getPassWord())){
-				if(adu.getCheck().equalsIgnoreCase((String)req.getSession().getAttribute("code"))){
+				if(adu.getCheck().equalsIgnoreCase((String)req.getSession().getAttribute("code")) || adu.getCheck().equalsIgnoreCase((String) baseRedisService.getString(adu.getCheck()))){
 					req.getSession().removeAttribute("code");
+					baseRedisService.delKey(adu.getCheck());
 					if( ONE_NUMBER.equals(studioService.doLogin(adu, req))){
 						return new StatusMessage(RESPOSE_SUCCESS, "SUCCESS");
 					}
@@ -292,7 +298,7 @@ public class StudioController implements Parameter {
 		String userSession;
 		try {
 			userSession = (String)req.getSession().getAttribute(userName);
-			if(null != userSession){return userSession;}
+			if(null != userSession || null != baseRedisService.getString(userName)){return userSession;}
 			throw new CommonException(PublicErrorCode.QUERY_EXCEPTION.getIntValue(), "NOSession");
 		}catch (Exception e){throw new CommonException(PublicErrorCode.QUERY_EXCEPTION.getIntValue(), "GetSessionError");}
 	}
