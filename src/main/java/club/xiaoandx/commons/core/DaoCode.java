@@ -34,13 +34,4 @@ public interface DaoCode {
 	 * 数据库操作失败
 	 */
 	static final Integer ERROR = 0;
-	/**
-	 * 参与内容公开
-	 */
-	static final int YES_PUBLIC = 0;
-	/**
-	 * 参与内容不公开
-	 */
-	static final int NO_PUBLIC = 1;
-	
 }

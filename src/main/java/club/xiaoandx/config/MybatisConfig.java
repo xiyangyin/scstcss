@@ -59,9 +59,7 @@ public class MybatisConfig {
 	}
 	
 	@Bean(name = "sqlSessionTemplate")
-	public SqlSessionTemplate test1SqlSessionTemplate(@Qualifier("sqlSessionFactory")
-														SqlSessionFactory sqlSessionFactory
-			) {
+	public SqlSessionTemplate test1SqlSessionTemplate(@Qualifier("sqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
 		return new SqlSessionTemplate(sqlSessionFactory);
 	}
 }

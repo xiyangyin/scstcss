@@ -19,7 +19,7 @@ public class NoAuthenticationException extends RuntimeException {
 	
 	public NoAuthenticationException() {
 		super("Token invalid. Please re-obtain the latest token");
-		this.code = PublicErrorCode.AUTH_EXCEPTION.getIntValue();
+		this.code = PublicErrorCode.OPERATION_EXCEPTION.getIntValue();
 	}
 	
 	public NoAuthenticationException(Integer code, String message) {

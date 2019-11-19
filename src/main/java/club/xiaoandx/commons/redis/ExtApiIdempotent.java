@@ -22,7 +22,7 @@ import java.lang.annotation.Target;
 
 /**  
  * <p> 
- *
+ *	token验证注解-自定义
  * </p> 
  * @ClassName:ExtApiIdempotent   
  * @author: xiaoandx.zhouwei

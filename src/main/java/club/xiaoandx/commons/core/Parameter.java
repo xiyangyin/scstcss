@@ -16,7 +16,7 @@
 package club.xiaoandx.commons.core;
 
 /**  
- * <p> </p> 
+ * <p>常用输入变量值</p>
  * @ClassName:Parameter   
  * @author: XIAOX.周巍 
  * @date: 2019年5月22日 上午11:05:39   

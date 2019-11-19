@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2012-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -40,8 +40,9 @@ import club.xiaoandx.commons.utils.RedisTokenUtil;
 
 /**  
  * <p> 
- *
- * </p> 
+ *	token验证AOP，通过拦截请求获取请求（head，from）中的token参数并验证token，验证无误放开请求访问Controller对应方法，
+ *	token异常（为空，请求中不包含token，token错误）时，提示请求者（{"code": 4008909,"massage": "Token invalid, please re-obtain the latest token"}）
+ * </p>
  * @ClassName:ExtApiAopIdempotent   
  * @author: xiaoandx.zhouwei
  * @date: 2019-10-21 11:37
@@ -59,7 +60,14 @@ public class ExtApiAopIdempotent {
 	public void rlAop() {
 	}
 
-	// 前置通知转发Token参数
+	/**
+	 * @Title: before
+	 * @Description 前置通知转发Token参数
+	 * @Date 8:32 2019/11/19
+	 * @version:V0.1
+	 * @Author: zhouwei
+	 * @Param [point]
+	 **/
 	@Before("rlAop()")
 	public void before(JoinPoint point) {
 		MethodSignature signature = (MethodSignature) point.getSignature();
@@ -69,7 +77,15 @@ public class ExtApiAopIdempotent {
 		}
 	}
 
-	// 环绕通知验证参数
+	/**
+	 * @Title: doAround
+	 * @Description 环绕通知验证token参数(是否为空，是否格式错误，请求中是否包含token)
+	 * @Date 8:42 2019/11/19
+	 * @version:V0.1
+	 * @Author: zhouwei
+	 * @Param [proceedingJoinPoint]
+	 * @return java.lang.Object
+	 **/
 	@Around("rlAop()")
 	public Object doAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 		MethodSignature signature = (MethodSignature) proceedingJoinPoint.getSignature();
@@ -82,7 +98,16 @@ public class ExtApiAopIdempotent {
 		return proceed;
 	}
 
-	// 验证Token
+	/**
+	 * @Title: extApiIdempotent
+	 * @Description 验证token的具体方法. 1、先判断请求类型 head 还是 from；2、从请求中获取token，有token放行，无token输出异常；3、获取token后将验证token是否为null，同理逻辑执行；
+	 * 4、token不为空，将token与缓存中的token值对比，查询是否存在token，同理逻辑执行。
+	 * @Date 8:43 2019/11/19
+	 * @version:V0.1
+	 * @Author: zhouwei
+	 * @Param [proceedingJoinPoint, signature]
+	 * @return java.lang.Object
+	 **/
 	public Object extApiIdempotent(ProceedingJoinPoint proceedingJoinPoint, MethodSignature signature)
 			throws Throwable {
 		ExtApiIdempotent extApiIdempotent = signature.getMethod().getDeclaredAnnotation(ExtApiIdempotent.class);
@@ -138,7 +163,5 @@ public class ExtApiAopIdempotent {
 		} finally {
 			writer.close();
 		}
-
 	}
-
 }
