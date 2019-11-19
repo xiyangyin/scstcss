@@ -207,7 +207,7 @@ public class StudioServiceImpl implements StudioService, Parameter, DaoCode {
 		List<User> oU =  studioMapper.doLogin(adu);
 		if (!oU.isEmpty()){
 			String usernameSession = oU.get(ENTER_NUMBER).getUserName();
-			req.getSession().setAttribute(usernameSession, JSON.toJSONString(oU.get(ENTER_NUMBER)));
+			req.getSession().setAttribute(usernameSession, JSON.toJSONString(usernameSession));
 			//将user写入redis
 			baseRedisService.setString(usernameSession, usernameSession, REDISTIME);
 			return SUCCESS;
