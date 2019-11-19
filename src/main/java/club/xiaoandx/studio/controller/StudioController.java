@@ -76,20 +76,6 @@ public class StudioController implements Parameter {
 	private BaseRedisService baseRedisService;
 
 	/**
-	 * @Title: denfult
-	 * @Description 请求服务器根目录
-	 * @Date 11:45 2019/11/19
-	 * @version:V0.1
-	 * @Author: zhouwei
-	 * @Param []
-	 * @return club.xiaoandx.studio.vo.StatusMessage
-	 **/
-	@GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-	@ApiOperation(httpMethod = "GET", value = "请求服务器根目录", notes = "无需参数<br><br><b>@author xiaox.周巍</b>")
-	@ApiResponses({ @ApiResponse(code = 400, message = "未传入指定参数"), @ApiResponse(code = 404, message = "未找到指定页面") })
-	public StatusMessage denfult(){ return new StatusMessage(RESPOSE_SUCCESS, "Welcome to the SCSTSC Studio API"); }
-	
-	/**
 	 * <p>
 	 * 查询所有的工作室
 	 * </p>
