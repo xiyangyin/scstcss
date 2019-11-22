@@ -34,8 +34,16 @@ import java.util.Random;
  * @Copyright: Note: This prohibition leaks and for other commercial projects
  */
 public class CaptchaUtil {
-	private BufferedImage image;// 图像
-	private String str;// 验证码
+	/**
+	 * 验证码图片
+	 **/
+	private BufferedImage image;
+
+	/**
+	 * 验证码内容
+	 **/
+	private String str;
+
 	private static char code[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789".toCharArray();
 
 	public static final String SESSION_CODE_NAME = "code";
@@ -44,27 +52,57 @@ public class CaptchaUtil {
 		init();// 初始化属性
 	}
 
-	/*
-	 * 取得RandomNumUtil实例
-	 */
+	/**
+	 * @Title: Instance
+	 * @Description 取得CaptchaUtil实例
+	 * @Date 10:51 2019/11/20
+	 * @version:V0.1
+	 * @Author: zhouwei
+	 * @Param []
+	 * @return club.xiaoandx.commons.utils.CaptchaUtil
+	 **/
 	public static CaptchaUtil Instance() {
 		return new CaptchaUtil();
 	}
 
-	/*
-	 * 取得验证码图片
-	 */
+	/**
+	 * @Title: getImage
+	 * @Description 取得验证码图片
+	 * @Date 10:51 2019/11/20
+	 * @version:V0.1
+	 * @Author: zhouwei
+	 * @Param []
+	 * @return java.awt.image.BufferedImage
+	 **/
 	public BufferedImage getImage() {
 		return this.image;
 	}
 
 	/*
-	 * 取得图片的验证码
+	 *
 	 */
+	/**
+	 * @Title: getString
+	 * @Description 取得图片的验证码内容：如YHjd
+	 * @Date 10:52 2019/11/20
+	 * @version:V0.1
+	 * @Author: zhouwei
+	 * @Param []
+	 * @return java.lang.String
+	 **/
 	public String getString() {
 		return this.str;
 	}
 
+	/**
+	 * @Title: init
+	 * @Description 初始化生成验证码并生成图片
+	 * @Date 10:52 2019/11/20
+	 * @version:V0.1
+	 * @Author: zhouwei
+	 * @Param []
+	 * @return void
+	 **/
 	private void init() {
 		// 在内存中创建图象
 		int width = 100, height = 40;
@@ -113,18 +151,27 @@ public class CaptchaUtil {
 		// System.out.println("验证码图片产生出现错误：" + e.toString());
 		// }
 		// this.image = input
-		this.image = image;/* 赋值图像 */
+		/* 赋值图像 */
+		this.image = image;
 	}
 
-	/*
-	 * 给定范围获得随机颜色
-	 */
+	/**
+	 * @Title: getRandColor
+	 * @Description 给定范围获得随机颜色
+	 * @Date 10:53 2019/11/20
+	 * @version:V0.1
+	 * @Author: zhouwei
+	 * @Param [fc, bc]
+	 * @return java.awt.Color
+	 **/
 	private Color getRandColor(int fc, int bc) {
 		Random random = new Random();
-		if (fc > 255)
+		if (fc > 255) {
 			fc = 255;
-		if (bc > 255)
+		}
+		if (bc > 255) {
 			bc = 255;
+		}
 		int r = fc + random.nextInt(bc - fc);
 		int g = fc + random.nextInt(bc - fc);
 		int b = fc + random.nextInt(bc - fc);

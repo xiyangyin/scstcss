@@ -22,13 +22,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author belle-fille
- */
+ * @Title:
+ * @Description 请求根目录(http://api.xiaoandx.club)时提示访问者信息
+ * @Date 11:00 2019/11/20
+ * @version:V0.1
+ * @Author: zhouwei
+ **/
 @RestController
 public class RootController implements Parameter {
+
     /**
      * @Title: denfult
-     * @Description 请求服务器根目录
+     * @Description 请求服务器根目录（"/"）请求路径
      * @Date 11:45 2019/11/19
      * @version:V0.1
      * @Author: zhouwei
