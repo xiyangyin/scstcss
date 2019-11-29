@@ -1,10 +1,10 @@
 sys:
   version: 1.0
-qinliu: 
-  accessKey: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-  secretKey: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+qinliu:
+  accessKey: 7mYw774OhImScvEks6XR3TAtSp87P68_oiUbfcMb
+  secretKey: fJUdt_T7pX_Vib-Y-BlpKtl2JT7tet1xl2PDq8O2
   bucket: xiaoandx
-  
+
 logging.level.club.xiaoandx: DEBUG
 
 spring:
@@ -12,8 +12,8 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/scstcss_data?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=UTF8&useSSL=false&rewriteBatchedStatements=true&serverTimezone=UTC
-    username: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-    password: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    username: root
+    password: 2324671838
     hikari:
       auto-commit: false
       minimum-idle: 2
@@ -38,17 +38,20 @@ spring:
         # 连接超时时间（毫秒）
         timeout: 5000
         #默认是索引为0的数据库
-        database: 0 
-      
+        database: 0
 #pagehelper:
 #    helperDialect: Mysql
 #    reasonable: true
 #    supportMethodsArguments: true
 #    pageSizeZero: true
 #    params: count=countSql      
-      
+
 server:
-#  port: 80
+  port: 443
+  ssl:
+    key-store: classpath:3161581_api.xiaoandx.club.pfx
+    key-store-password: 9K1p3ke4
+    key-store-type: PKCS12
   tomcat:
     accesslog:
       enabled: true
