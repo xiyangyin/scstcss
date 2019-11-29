@@ -43,6 +43,15 @@ public class SCSTCSSWebApp {
 		SpringApplication.run(SCSTCSSWebApp.class, args);
 	}
 
+    /**
+     * @Title: servletContainer
+     * @Description 设置http协议转https协议(本设置以 80(http)  443(https) 为例)
+     * @Date 20:56 2019/11/29
+     * @version:V0.1
+     * @Author: zhouwei
+     * @Param []
+     * @return org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory
+     **/
 	@Bean
 	public TomcatServletWebServerFactory servletContainer() {
 		TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory() {
@@ -60,6 +69,15 @@ public class SCSTCSSWebApp {
 		return tomcat;
 	}
 
+	/**
+	 * @Title: httpConnector
+	 * @Description 设置端口跳转
+	 * @Date 20:56 2019/11/29
+	 * @version:V0.1
+	 * @Author: zhouwei
+	 * @Param []
+	 * @return org.apache.catalina.connector.Connector
+	 **/
 	@Bean
 	public Connector httpConnector() {
 		Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
